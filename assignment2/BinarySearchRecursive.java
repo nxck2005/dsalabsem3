@@ -1,3 +1,5 @@
+package dsalabsem3.assignment2;
+
 import java.util.Scanner;
 
 class BinarySearchRecursive {
@@ -37,5 +39,6 @@ class BinarySearchRecursive {
         } else {
             System.out.println("\nItem not found in array.");
         }
+        sc.close();
     }
 }
