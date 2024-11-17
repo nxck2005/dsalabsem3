@@ -76,6 +76,61 @@ public class LinkedList {
 
     // Delete the node at the start of the list
     void FDelete() {
-        // If start points to nothing, there ar
+        // If start points to nothing, there are zero nodes in the list so you can't delete anything
+        // Print a underflow message to the user
+        if (start == null) {
+            System.out.println("Stack underflow, no change was made!");
+            return;
+        }
+
+        // 2 cases can happen now
+        // Either one node is present or N nodes are present.
+        // If one node is present, simply remove the reference of the first node in start
+        // and the node is effectively lost and considered deleted.
+        // IF N nodes are present, the second node (the node which the first node points to, i.e. start.link)
+        // would become the first node.
+        // Start would then have the reference to second node instead of first, and start.link would then point to 
+        // nothing and would be lost and considered deleted.
+        // To have a reference to the first node before deletion to help with this, initialize a Node ptr to start.
+        // Also set the first node's link to null to avoid a dangling pointer
+        
+        Node ptr = start;
+        if (start.link == null) { // If only one node is present, remove reference of it from start and remove ptr.link
+            start = null;
+            ptr.link = null;
+        } 
+        
+        start = start.link // The reference of the first node now points to the second node
+        ptr.link = null; // Avoid dangling pointer by setting the former first node to null
+    }
+
+    // Delete the last node in the list
+    void LDelete() {
+        // Again, if start points to null, no node is present hence can't delete anything
+        if (start == null) {
+            System.out.println("Stack underflow, no change was made");
+            return;
+        }
+        
+        // Again, initialize a pointer to start for future reference to first node
+        // And in this case, we'll need the node before it too, for changing of links after the first pointer is 
+        // deleted.
+        // For it, we can initialize two pointers pointing to start and start.link 
+        // We can make ptr2 follow its links, and make ptr1 follow ptr2 until ptr2's link reaches null
+        // At last, ptr2 will contain last node and ptr1 will be the second last.
+        // Then make the second last node point to nothing (ptr1.link = null). Then the reference to last node is lost
+        // hence the node is effectively deleted as there is no way to reference it.
+
+        Node ptr1 = start;
+        Node ptr2 = start.link;
+
+        while (ptr2.link != null) {
+            ptr1 = ptr2;
+            ptr2 = ptr2.link;
+        }
+
+        ptr1.link = null;
+    }
+    
 
 
