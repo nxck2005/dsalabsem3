@@ -131,6 +131,22 @@ public class LinkedList {
 
         ptr1.link = null;
     }
-    
 
+    // Helper function to print the entire list
+    // By traversing the entire list using links from start node.
+    void printList() {
+        Node ptr = start;
+        while (ptr != null) {
+            System.out.println(ptr.info + " ");
+            ptr = ptr.link;
+        }
+    }
+
+    // Main function to demonstrate linked lists
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        return;
+    }
+}
+    
 
