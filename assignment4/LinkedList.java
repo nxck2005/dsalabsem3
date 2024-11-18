@@ -132,6 +132,34 @@ public class LinkedList {
         ptr1.link = null;
     }
 
+    // Insert a node anywhere in the linked list 
+    void PInsert(int item, int index) {
+        Node newnode = new Node(item);
+        // To insert at any position, we need to run an count (zero indexed) to actually know where to insert
+        // and where we ARE inserting
+        // But first, if the start pointer is null, the list is already empty, so just add a reference
+        // to the newnode with start, to officiate it as the first node. WOOHOO
+        if (start == null) {
+            start = newnode;
+            return
+        }
+        // a ptr is initialized to traverse the node until our count variable reaches the index we were given
+        Node ptr = start;
+        int count = 0;
+
+        while (c < pos - 1) {
+            ptr = ptr.link;
+            c++;
+        }
+
+        // The ptr is pointing to the node at the place of the insertion. If that node
+        // then points to the newnode, and newnode points to former ptr.link, newnode effectively takes the 
+        // place of the former ptr.
+
+        newnode.link = ptr.link;
+        ptr.link = newnode;
+    }
+
     // Helper function to print the entire list
     // By traversing the entire list using links from start node.
     void printList() {
