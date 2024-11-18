@@ -100,7 +100,7 @@ public class LinkedList {
             ptr.link = null;
         } 
         
-        start = start.link // The reference of the first node now points to the second node
+        start = start.link; // The reference of the first node now points to the second node
         ptr.link = null; // Avoid dangling pointer by setting the former first node to null
     }
 
@@ -141,15 +141,15 @@ public class LinkedList {
         // to the newnode with start, to officiate it as the first node. WOOHOO
         if (start == null) {
             start = newnode;
-            return
+            return;
         }
         // a ptr is initialized to traverse the node until our count variable reaches the index we were given
         Node ptr = start;
         int count = 0;
 
-        while (c < pos - 1) {
+        while (count < index - 1) {
             ptr = ptr.link;
-            c++;
+            count++;
         }
 
         // The ptr is pointing to the node at the place of the insertion. If that node
@@ -160,10 +160,34 @@ public class LinkedList {
         ptr.link = newnode;
     }
 
+    // Delete a node anywhere in the linked list
+    void PDelete(int index) {
+        // Use the same counter method as PInsert but use two pointers as we'll also need the address
+        // of the node before the node to be deleted, so that it can point to the node that is after the 
+        // deleted node.
+        int c = 0;
+        Node ptr1 = null;
+        Node ptr2 = start;
+
+        // If there is no node pointed to by start, list is empty and hence can't delete anything lol
+        if (ptr2.link == null) {
+            System.out.println("Stack underflow, no changes made");
+            return;
+        } 
+        while (c < index) {
+            ptr1 = ptr2;
+            ptr2 = ptr2.link;
+            c++;
+        }
+        ptr1.link = ptr2.link;
+        ptr2.link = null;
+    }
+
     // Helper function to print the entire list
     // By traversing the entire list using links from start node.
     void printList() {
         Node ptr = start;
+        System.out.println("The list after all operations are done: ");
         while (ptr != null) {
             System.out.println(ptr.info + " ");
             ptr = ptr.link;
@@ -173,7 +197,16 @@ public class LinkedList {
     // Main function to demonstrate linked lists
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        return;
+        list.FInsert(5);
+        list.printList();
+        list.LInsert(6);
+        list.printList();
+        list.LInsert(7);
+        list.printList();
+        list.PDelete(1);
+        list.printList();
+        list.PInsert(10, 1);
+        list.printList();
     }
 }
     
