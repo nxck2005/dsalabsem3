@@ -194,6 +194,26 @@ public class LinkedList {
         }
     }
 
+    // Reverse the linked list
+    void reverseList() {
+        // Initialize three pointers prev as NULL, middle as start, and next as NULL.
+        // Iterate through the linked list. In a loop, do the following:
+        // Store the next node, next = middle -> link
+        // Update the link pointer of middle to prev, middle.link = prev
+        // Update prev as middle and middle as next, prev = curr and curr = next
+        Node prev = null;
+        Node middle = start;
+        Node next = null;
+
+        while (middle != null) {
+            next = middle.link;
+            middle.link = prev;
+            prev = middle;
+            middle = next;
+        }
+        start = prev;
+    }
+
     // Main function to demonstrate linked lists
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
@@ -207,7 +227,7 @@ public class LinkedList {
         list.printList();
         list.PInsert(10, 1);
         list.printList();
+        list.reverseList();
+        list.printList();
     }
 }
-    
-
