@@ -214,6 +214,22 @@ public class LinkedList {
         start = prev;
     }
 
+    // Concatenate two linked lists
+    void concatenate(LinkedList other) {
+        if (other.head == null) {
+            return;
+        }
+        if (this.head == null) {
+            this.head = other.head;
+            return;
+        }
+        Node current = this.head;
+        while (current.link != null) {
+            current = current.link;
+        }
+        current.link = other.head;
+    }
+
     // Main function to demonstrate linked lists
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
